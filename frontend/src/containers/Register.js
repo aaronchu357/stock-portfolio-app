@@ -4,7 +4,7 @@ import RegisterForm from '../forms/RegisterForm'
 const Register = props => {
   return(
     <div className="register">
-      <RegisterForm />
+      <RegisterForm props={props}/>
     </div>
   )
 }

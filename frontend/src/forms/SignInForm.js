@@ -7,26 +7,8 @@ const SignInForm = props => {
   
   const onFormSubmit = (e) => {
     e.preventDefault()
-    debugger
-    fetch('http://localhost:3000/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({ email: email, password: password })
-    })
-      .then(resp => resp.json())
-      .then(parsedResponse => {
-        debugger
-        if (parsedResponse.token) {
-          localStorage.setItem('token', parsedResponse.token)
-          this.setState({ user: parsedResponse.user })
-          props.history.push('/portfolio')
-        } else {
-          alert("Please check your email and password.")
-        }
-      })
+    let userData = { email: email, password: password }
+    props.handleSubmit(userData, props.history, 'login', 'Please check your email and password.')
   }
 
   return(
