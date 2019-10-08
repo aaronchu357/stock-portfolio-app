@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     user.email.downcase!
+    user.balance = 5000
     if user.save
       if params[:transaction_attributes]
         params[:transaction_attributes].each do |transaction_param|
@@ -31,6 +32,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :balance)
+    params.permit(:email, :password, :password_confirmation, :balance)
   end
 end
