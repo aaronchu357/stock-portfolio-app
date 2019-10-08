@@ -15,7 +15,7 @@ class UsersController < ApplicationController
           user.transactions << Transaction.find(transaction_param[:id])
         end
       end
-      render json: { token: encode_token(user_payload(user)), user: user  }, status: :created
+      render json: { token: encode_token(user_payload(user)), user: user }, status: :created
     else
       render json: { error: 'failed to create user' }, status: :not_acceptable
     end

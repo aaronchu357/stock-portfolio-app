@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import SignIn from './containers/SignIn'
 import Register from './containers/Register'
+import Portfolio from './containers/Portfolio'
 
-const App = () => {
+class App extends React.Component {
 
-  const [userData, setUserData] = useState([])
-  
-  const handleSubmit = (userData, history, endpoint, alertMessage) => {
+  state = { userData: '' }
+
+  componentDidMount() {
+    if (localStorage.token) {
+      fetch('http://localhost:3000/profile', {
+        headers: {
+          Authorization: localStorage.token
+        }
+      })
+        .then(resp => resp.json())
+        .then(userInfo => {
+          this.setState({ userData: userInfo.data.attributes })
+        })
+    }
+  }
+
+  handleSubmit = (userData, history, endpoint, alertMessage) => {
     fetch(`http://localhost:3000/${endpoint}`, {
       method: 'POST',
       headers: {
@@ -20,7 +35,7 @@ const App = () => {
       .then(parsedResponse => {
         if (parsedResponse.token) {
           localStorage.setItem('token', parsedResponse.token)
-          setUserData({ user: parsedResponse.user })
+          this.setState({ userData: parsedResponse.user })
           history.push('/portfolio')
         } else {
           alert(alertMessage)
@@ -28,22 +43,26 @@ const App = () => {
       })
   }
 
-  return (
-    <Switch>
-      {
-        localStorage.token ?
-          <Redirect to='/portfolio' />
-          :
-          <Route path='/' render={(routerProps) => <SignIn {...routerProps} handleSubmit={handleSubmit} />} />
-      }
-      {
-        localStorage.token ?
-          <Redirect to='/portfolio' />
-          :
-          <Route path='/register' render={(routerProps) => <Register {...routerProps} handleSubmit={handleSubmit} />} />
-      }
-    </Switch>
-  );
+  render() {
+    return (
+      <Switch>
+        <Route path='/portfolio' render={(routerProps) => <Portfolio {...routerProps} userData={this.state.userData} />} />
+        {
+          localStorage.token ?
+            <Redirect to='/portfolio' />
+            :
+            <Route path='/signin' render={(routerProps) => <SignIn {...routerProps} handleSubmit={this.handleSubmit} />} />
+        }
+        {
+          localStorage.token ?
+            <Redirect to='/portfolio' />
+            :
+            <Route path='/register' render={(routerProps) => <Register {...routerProps} handleSubmit={this.handleSubmit} />} />
+        }
+      </Switch>
+    );
+  }
 }
+
 
 export default App;

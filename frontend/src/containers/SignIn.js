@@ -2,9 +2,9 @@ import React from 'react'
 import SignInForm from '../forms/SignInForm'
 
 const SignIn = props => {
-  return(
+  return (
     <div className="sign-in">
-      <SignInForm props={props}/>
+      <SignInForm {...props} />
     </div>
   )
 }

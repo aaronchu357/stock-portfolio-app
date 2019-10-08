@@ -2,9 +2,9 @@ import React from 'react'
 import RegisterForm from '../forms/RegisterForm'
 
 const Register = props => {
-  return(
+  return (
     <div className="register">
-      <RegisterForm props={props}/>
+      <RegisterForm {...props} />
     </div>
   )
 }

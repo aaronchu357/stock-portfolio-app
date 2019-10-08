@@ -5,13 +5,15 @@ const RegisterForm = props => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const [name, setName] = useState('')
 
   const onFormSubmit = (e) => {
     e.preventDefault()
     let userData = {
       email: email,
       password: password,
-      password_confirmation: passwordConfirmation
+      password_confirmation: passwordConfirmation,
+      name: name
     }
     props.handleSubmit(userData, props.history, 'signup', 'Invalid')
   }
@@ -19,6 +21,8 @@ const RegisterForm = props => {
   return (
     <form className="register-form" onSubmit={onFormSubmit}>
       Sign In
+      <br />
+      Name: <input type="text" name="name" placeholder="Enter Name" value={name} onChange={e => setName(e.target.value)} required />
       <br />
       Email: <input type="email" name="email" placeholder="Enter Email" value={email} onChange={e => setEmail(e.target.value)} required />
       <br />

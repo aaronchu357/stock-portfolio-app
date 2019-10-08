@@ -1,6 +1,7 @@
 class AuthController < ApplicationController
   skip_before_action :verify_authenticity_token
   def login
+    params[:email].downcase!
     user = User.find_by(email: params[:email])
     is_authenticated = user.authenticate(params[:password])
 
