@@ -8,7 +8,7 @@ const App = () => {
   const [userData, setUserData] = useState([])
   
   const handleSubmit = (userData, history, endpoint, alertMessage) => {
-    fetch(`/${endpoint}`, {
+    fetch(`http://localhost:3000/${endpoint}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
