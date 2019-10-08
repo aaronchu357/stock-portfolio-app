@@ -6,8 +6,8 @@ const Portfolio = props => {
   // const [userData, setUserData] = useState([])
 
   // useEffect(() => {
-  //   debugger
   //   if (localStorage.token) {
+  //     debugger
   //     fetch('/profile', {
   //       headers: {
   //         Authorization: localStorage.token
@@ -16,7 +16,7 @@ const Portfolio = props => {
   //       .then(resp => resp.json())
   //       .then(userInfo => {
   //         debugger
-  //         setUserData(userInfo.data.attributes)
+  //         setUserData(props.userInfo.data.attributes)
   //       })
   //   } else {
   //     props.history.push('/signin')
@@ -53,14 +53,11 @@ const Portfolio = props => {
           handleStock(ticker, quantity, price, userBalance, transactionTotal)
         }
       })
-      .catch(error => {
-        alert(error)
-      })
+      .catch(error => console.log(error))
   }
 
   const handleStock = (ticker, quantity, price, balance, total) => {
-    let stockInfo = { ticker: ticker, price: price}
-    debugger
+    let stockInfo = { ticker: ticker, price: price }
     fetch(`http://localhost:3000/stocks`, {
       method: 'POST',
       headers: {
@@ -71,41 +68,42 @@ const Portfolio = props => {
       body: JSON.stringify(stockInfo)
     })
       .then(resp => resp.json())
-      .then(console.log)
-      // .then(stockData => {
-      //   debugger
-      //   // handleTransaction(stockData.data, quantity, balance, total)
-      // })
-      // .catch(error => alert(error))
+      .then(stockData => {
+        handleTransaction(stockData.data, quantity, balance, total)
+      })
+      .catch(error => console.log(error))
   }
 
-  // const handleTransaction = (stockData, quantity, balance, total) => {
-  //   fetch('http://localhost:3000/transactions', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       quantity: quantity,
-  //       user_id: props.userData.id,
-  //       stock_id: stockData.id
-  //     })
-  //       .then(resp => resp.json())
-  //       .then(transactionData => {
-  //         debugger
-  //       })
-  //       .catch(error => alert(error))
-  //   })
-  // }
+  const handleTransaction = (stockData, quantity, balance, total) => {
+    debugger
+    let transactionInfo = {
+      quantity: parseInt(quantity),
+      user_id: props.userData.id,
+      stock_id: parseInt(stockData.id)
+    }
+    fetch('http://localhost:3000/transactions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        Authorization: localStorage.token
+      },
+      body: JSON.stringify(transactionInfo)
+    })
+      .then(resp => resp.json())
+      .then(transactionData => {
+        debugger
+      })
+      .catch(error => console.log(error))
+  }
 
   return (
     <div className="portfolio">
       <h2 className="page-header">Portfolio</h2>
-      Hi, {props.userData.name}
+      Hi, {props.userData === "" ? null : props.userData.attributes.name}
       <br />
 
-      Balance: {props.userData.balance}
+      Balance: {props.userData === "" ? null : props.userData.attributes.balance}
       <BuyStockForm {...props} handleStockFormSubmit={handleStockFormSubmit} />
     </div>
   )

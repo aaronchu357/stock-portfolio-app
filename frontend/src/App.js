@@ -17,7 +17,7 @@ class App extends React.Component {
       })
         .then(resp => resp.json())
         .then(userInfo => {
-          this.setState({ userData: userInfo.data.attributes })
+          this.setState({ userData: userInfo.data })
         })
     }
   }
@@ -46,7 +46,7 @@ class App extends React.Component {
   render() {
     return (
       <Switch>
-        <Route path='/portfolio' render={(routerProps) => <Portfolio {...routerProps} userData={this.state.userData} />} />
+        <Route exact path='/portfolio' render={(routerProps) => <Portfolio {...routerProps} userData={this.state.userData} />} />
         {
           localStorage.token ?
             <Redirect to='/portfolio' />
