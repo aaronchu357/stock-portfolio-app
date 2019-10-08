@@ -5,13 +5,17 @@ const BuyStockForm = props => {
   const [ticker, setTicker] = useState('')
   const [quantity, setQuantity] = useState(0)
 
+  const handleStockFormSubmit = (e) => {
+    e.preventDefault()
+    props.handleStockFormSubmit(ticker, quantity)
+  }
+
   return (
-    <form>
-      Balance: {props.balance}
+    <form onSubmit={handleStockFormSubmit}>
       <br />
-      <input type="text" name="ticker" placeholder="Ticker" />
+      <input type="text" name="ticker" placeholder="Ticker" value={ticker} onChange={e => setTicker(e.target.value)} />
       <br />
-      <input type="" name="quantity" placeholder="Quantity" />
+      <input type="number" name="quantity" placeholder="Quantity" value={quantity} min="1" max="10000" onChange={e => setQuantity(e.target.value)} />
       <br />
       <input type="submit" name="submit" value="Purchase" />
     </form>
