@@ -37,6 +37,7 @@ const Portfolio = props => {
     fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=GJNL5RPAWAUNFOK6`)
       .then(resp => resp.json())
       .then(stockData => {
+        debugger
         let userBalance = props.userData.attributes.balance
         let price = parseFloat(stockData["Global Quote"]["05. price"])
         let transactionTotal = price * quantity
@@ -48,7 +49,7 @@ const Portfolio = props => {
       })
       .catch(error => {
         console.log(error)
-        alert('Oops, something went wrong! Check that you have entered a valid symbol')
+        alert('Oops, something went wrong! Check that you have entered a valid symbol. If it still does not work, please wait 60 seconds due to the API call constraints.')
       })
   }
 
