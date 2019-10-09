@@ -20,7 +20,7 @@ const RegisterForm = props => {
 
   return (
     <form className="register-form" onSubmit={onFormSubmit}>
-      Sign In
+      Register
       <br />
       Name: <input type="text" name="name" placeholder="Enter Name" value={name} onChange={e => setName(e.target.value)} required />
       <br />
