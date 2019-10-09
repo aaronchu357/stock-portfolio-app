@@ -5,7 +5,7 @@ class PortfolioPage extends React.Component {
 
   state = {
     userData: '',
-    balance: 0
+    balance: ''
   }
 
   componentDidMount() {
@@ -17,12 +17,15 @@ class PortfolioPage extends React.Component {
       })
         .then(resp => resp.json())
         .then(userInfo => {
-          this.setState({ userData: userInfo.data, balance: userInfo.data.attributes.balance })
+          this.setState({
+            userData: userInfo.data,
+            balance: userInfo.data.attributes.balance
+          })
         })
     }
   }
 
-   handleBalanceChange = (remainingBalance) => {
+  handleBalanceChange = (remainingBalance) => {
     fetch(`http://localhost:3000/users/${this.props.userData.id}`, {
       method: 'PATCH',
       headers: {
@@ -38,22 +41,14 @@ class PortfolioPage extends React.Component {
       })
   }
 
-  // useEffect(() => {
-  //   if (props.userData !== "") {
-  //     setUserData(props.userData)
-  //   } else {
-  //     props.history.push('/signin')
-  //   }
-  // }, [userData])
   render() {
-
     return (
       <div>
         <h2 className="page-header">Portfolio</h2>
         Hi, {this.state.userData ? this.state.userData.attributes.name : null}
         <br />
         Balance: {this.state.balance ? this.state.balance : null}
-        <Portfolio {...this.props} handleBalanceChange={this.handleBalanceChange}/>
+        <Portfolio {...this.props} handleBalanceChange={this.handleBalanceChange} />
       </div>
     )
   }
