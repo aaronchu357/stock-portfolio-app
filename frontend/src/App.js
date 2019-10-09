@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import SignIn from './containers/SignIn'
 import Register from './containers/Register'
-import Portfolio from './containers/Portfolio'
+import PortfolioPage from './containers/PortfolioPage'
 
 class App extends React.Component {
 
@@ -46,7 +46,7 @@ class App extends React.Component {
   render() {
     return (
       <Switch>
-        <Route exact path='/portfolio' render={(routerProps) => <Portfolio {...routerProps} userData={this.state.userData} />} />
+        <Route exact path='/portfolio' render={(routerProps) => <PortfolioPage {...routerProps} userData={this.state.userData} />} />
         {
           localStorage.token ?
             <Redirect to='/portfolio' />
