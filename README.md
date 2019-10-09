@@ -1,7 +1,7 @@
 # Stock Portfolio README
 
 ## Information
-The root of this directory house all files for the server and the client. For the code in the frontend: `cd frontend`.
+The root of this directory house all files for the server and the client. For the frontend code: `cd frontend`.
 
 ## Setup
 If you want to run this on your local environment be sure to already have postgresql installed and run:
