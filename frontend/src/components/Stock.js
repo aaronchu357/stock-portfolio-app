@@ -7,6 +7,10 @@ const Stock = props => {
     dayOpenPrice: '',
     color: ''
   })
+  
+  const shares = Object.values(props.stockData)[0]
+  const ticker = Object.keys(props.stockData)[0]
+  const value = Math.round(stockState.price * shares * 10000) / 10000
 
   useEffect(() => {
     // Limited to 5 calls per minute, unable to show more than 5 stocks at once
@@ -31,13 +35,13 @@ const Stock = props => {
       })
       .catch(error => {
         console.log(error)
-        alert('Sorry about some of your portfolio data. You have reached the limit for API calls. Please wait one minute and try again.')
+        alert('Sorry about some of your portfolio data. You have reached the limit for API calls. Please wait 60 seconds and try again.')
       })
   }, [props.stockData])
 
   return (
     <li>
-      <em className="stock-ticker" style={{ color: `${stockState.color}` }}>{Object.keys(props.stockData)[0]}</em> - {Object.values(props.stockData)[0]} {Object.values(props.stockData)[0] === 1 ? "Share" : "Shares" } Value: ${Math.round(stockState.price * Object.values(props.stockData)[0] * 10000) / 10000}
+      <em className="stock-ticker" style={{ color: `${stockState.color}` }}>{ticker}</em> - {shares} {shares === 1 ? "Share" : "Shares" } Value: ${value}
     </li>
   )
 }
