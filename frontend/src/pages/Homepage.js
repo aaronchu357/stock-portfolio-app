@@ -4,7 +4,7 @@ import './Homepage.css'
 const Homepage = () => {
   return (
     <>
-      <h1>Stock Portfolio App</h1>
+      <h1 className="landing-page-main-header">Stock Portfolio App</h1>
       <div className='homepage-link'>
         <a class="effect1" href="http://localhost:3001/login">
           Log In
