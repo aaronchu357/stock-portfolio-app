@@ -7,7 +7,11 @@ class TransactionsController < ApplicationController
   end
 
   def index
-    transactions = Transaction.all
+    if params[:user_id]
+      transactions = User.find(params[:user_id]).transactions
+    else
+      transactions = Transaction.all
+    end
     render json: TransactionSerializer.new(transactions)
   end
 
