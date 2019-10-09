@@ -1,9 +1,10 @@
 import React from 'react'
 
 const Transaction = props => {
+  const transactionData = props.transactionData.attributes
   return (
     <>
-      {props.transactionData.attributes.method} ({props.transactionData.attributes.stock.ticker}) - {props.transactionData.attributes.quantity} Shares @ ${props.transactionData.attributes.price}
+      {transactionData.method} ({transactionData.stock.ticker}) - {transactionData.quantity} {transactionData.quantity === 1 ? "Share" : "Shares"} @ ${transactionData.price}
     </>
   )
 }
