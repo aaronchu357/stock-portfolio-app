@@ -1,16 +1,22 @@
 import React from 'react'
 import Stock from '../components/Stock'
 
-const PortfolioStock = props => {
+class PortfolioStock extends React.Component {
 
-  const renderStock = () => {
+  render(){
+    const renderStocks = () => {
+      debugger
+      this.props.stocks.map(stockData => {
+        return <Stock stockData={stockData}/>
+      })
+    }
     
-  }
-  return( 
-    <div>
-      <Stock />
+    return( 
+      <div>
+      {renderStocks}
     </div>
   )
+}
 }
 
 export default PortfolioStock

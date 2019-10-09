@@ -16,6 +16,33 @@ const Portfolio = props => {
   //   }
   // }, [userData])
 
+  const [stocks, setStocks] = useState([])
+  useEffect(() => {
+    if(props.userData){
+      //Change to /transactions instead of /users
+      fetch(`http://localhost:3000/users/${props.userData.id}`)
+      .then(resp => resp.json())
+      .then(userInfo => {
+        let final = []
+        let sortedTransactions = {}
+        userInfo.data.attributes.transactions.forEach(transaction => {
+          if(sortedTransactions[transaction.stock_id]){
+            sortedTransactions[transaction.stock_id] += sortedTransactions[transaction.quantity]
+          } else {
+            sortedTransactions[transaction.stock_id] = transaction.quantity
+          }
+        })
+        console.log(sortedTransactions)
+        Object.keys(sortedTransactions).forEach(key => {
+          let stockToPush = {}
+          stockToPush[key] = sortedTransactions[key]
+          final.push(stockToPush)
+        }) 
+        setStocks(final)
+      })
+    }
+  }, [props.userData])
+
   const handleStockFormSubmit = (ticker, quantity) => {
     fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=GJNL5RPAWAUNFOK6`)
       .then(resp => resp.json())
@@ -98,14 +125,13 @@ const Portfolio = props => {
   //       setUserData(userData.data)
   //     })
   // }
-  // debugger
   return (
     <div className="portfolio">
       {/* {console.log("1")}
       <h2 className="page-header">Portfolio</h2>
       Hi, {userData ? userData.attributes.name : null}
       <br /> */}
-      <PortfolioStock userData={props.userData} />
+      <PortfolioStock userData={props.userData} stocks={stocks}/>
       {/* Balance: {userBalance ? userBalance : null} */}
       <BuyStockForm {...props} handleStockFormSubmit={handleStockFormSubmit} />
     </div>
