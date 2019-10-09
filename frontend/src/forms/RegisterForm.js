@@ -15,7 +15,7 @@ const RegisterForm = props => {
       password_confirmation: passwordConfirmation,
       name: name
     }
-    props.handleSubmit(userData, props.history, 'signup', 'Invalid')
+    props.handleSubmit(userData, props.history, 'signup', 'Passwords do no match')
   }
 
   return (

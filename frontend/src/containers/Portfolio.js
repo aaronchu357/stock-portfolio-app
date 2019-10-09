@@ -46,7 +46,10 @@ const Portfolio = props => {
           handleStock(ticker, quantity, price, transactionTotal, method)
         }
       })
-      .catch(error => alert('Oops, something went wrong! Check that you have entered a valid symbol'))
+      .catch(error => {
+        console.log(error)
+        alert('Oops, something went wrong! Check that you have entered a valid symbol')
+      })
   }
 
   const handleStock = (ticker, quantity, price, total, method) => {
