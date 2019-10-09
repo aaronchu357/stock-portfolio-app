@@ -6,7 +6,7 @@ If you want to run this on your local environment be sure to already have postgr
 `rails db:migrate`, then
 `rails s`
 
-It will then start your server on http://localhost:3000/
+It will then start your server on http://localhost:3000/.
 To check routes, enter in your terminal: 
 `rails routes`
 
