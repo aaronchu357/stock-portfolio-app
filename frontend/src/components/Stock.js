@@ -40,9 +40,9 @@ const Stock = props => {
   }, [props.stockData])
 
   return (
-    <li>
+    <>
       <em className="stock-ticker" style={{ color: `${stockState.color}` }}>{ticker}</em> - {shares} {shares === 1 ? "Share" : "Shares" } Value: ${value}
-    </li>
+    </>
   )
 }
 
