@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import TransactionsContainer from '../containers/TransactionsContainer'
+import NavBar from '../components/NavBar'
 
 const TransactionPage = props => {
 
@@ -18,6 +19,7 @@ const TransactionPage = props => {
 
   return (
     <div>
+      <NavBar />
       Your Transactions:
       <br />
       {props.userData ? <TransactionsContainer transactions={transactions} /> : "Loading..."}

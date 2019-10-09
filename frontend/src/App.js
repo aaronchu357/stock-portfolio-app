@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import SignIn from './containers/SignIn'
 import Register from './containers/Register'
-import PortfolioPage from './containers/PortfolioPage'
+import PortfolioPage from './pages/PortfolioPage'
 import TransactionPage from './pages/TransactionPage'
 
 class App extends React.Component {

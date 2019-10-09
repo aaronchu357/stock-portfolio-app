@@ -29,12 +29,15 @@ const Stock = props => {
           color: tickerColor
         })
       })
-      .catch(error => alert(error))
+      .catch(error => {
+        console.log(error)
+        alert('Sorry about some of your portfolio data. You have reached the limit for API calls. Please wait one minute and try again.')
+      })
   }, [props.stockData])
 
   return (
     <li>
-      <em className="stock-ticker" style={{ color: `${stockState.color}` }}>{Object.keys(props.stockData)[0]}</em> - {Object.values(props.stockData)[0]} Shares Value: ${Math.round(stockState.price * Object.values(props.stockData)[0] * 10000) / 10000}
+      <em className="stock-ticker" style={{ color: `${stockState.color}` }}>{Object.keys(props.stockData)[0]}</em> - {Object.values(props.stockData)[0]} {Object.values(props.stockData)[0] === 1 ? "Share" : "Shares" } Value: ${Math.round(stockState.price * Object.values(props.stockData)[0] * 10000) / 10000}
     </li>
   )
 }

@@ -1,5 +1,6 @@
 import React from 'react'
-import Portfolio from './Portfolio'
+import Portfolio from '../containers/Portfolio'
+import NavBar from '../components/NavBar'
 
 class PortfolioPage extends React.Component {
 
@@ -44,6 +45,7 @@ class PortfolioPage extends React.Component {
   render() {
     return (
       <div>
+        <NavBar />
         <h2 className="page-header">Portfolio</h2>
         Hi, {this.state.userData ? this.state.userData.attributes.name : null}
         <br />
