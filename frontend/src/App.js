@@ -4,6 +4,7 @@ import SignIn from './containers/SignIn'
 import Register from './containers/Register'
 import PortfolioPage from './pages/PortfolioPage'
 import TransactionPage from './pages/TransactionPage'
+import Homepage from './pages/Homepage'
 
 class App extends React.Component {
 
@@ -47,13 +48,14 @@ class App extends React.Component {
   render() {
     return (
       <Switch>
+        <Route exact path='/' component={Homepage} />
         <Route exact path='/portfolio' render={(routerProps) => <PortfolioPage {...routerProps} userData={this.state.userData} />} />
         <Route exact path='/transactions' render={(routerProps) => <TransactionPage {...routerProps} userData={this.state.userData} />} />
         {
           localStorage.token ?
             <Redirect to='/portfolio' />
             :
-            <Route path='/signin' render={(routerProps) => <SignIn {...routerProps} handleSubmit={this.handleSubmit} />} />
+            <Route path='/login' render={(routerProps) => <SignIn {...routerProps} handleSubmit={this.handleSubmit} />} />
         }
         {
           localStorage.token ?
