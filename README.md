@@ -1,15 +1,12 @@
 # Stock Portfolio README
 
-If you want to run this on your local environment be sure to already have postgresql installed, run:
-`bundle install`, then
-`rails db:create`, then
-`rails db:migrate`, then
-`rails s`
+### Information
+The root of this directory house all files for the server and the client. For the code in the frontend: `cd frontend`.
+
+If you want to run this on your local environment be sure to already have postgresql installed and run:
+`bundle install`, then `rails db:create`, then `rails db:migrate`, and finally `rails s`.
 
 It will then start your server on http://localhost:3000/.
-To check routes, enter in your terminal: 
-`rails routes`
+To check routes, enter in your terminal: `rails routes`.
 
-To start the client(frontend), run:
-`npm install`, then
-`npm start`
+To start the client(frontend), `cd frontend`, then run: `npm install`, then `npm start`.
