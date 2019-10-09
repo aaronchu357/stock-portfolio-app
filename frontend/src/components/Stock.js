@@ -2,23 +2,10 @@ import React, { useState, useEffect } from 'react'
 
 const Stock = props => {
 
-  // state = {
-  //   price: '',
-
-  // }
-
-  // componentDidMount() {
-  //   fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${Object.keys(this.props.stockData)[0]}&apikey=GJNL5RPAWAUNFOK6`)
-  //     .then(resp => resp.json())
-  //     .then(stockData => {
-  //       this.setState({ price: parseFloat(stockData["Global Quote"]["05. price"]) })
-  //     })
-  //     .catch(error => alert(error))
-  // }
-
   const [stockState, setStockState] = useState({
     price: '',
-    dayOpenPrice: ''
+    dayOpenPrice: '',
+    color: ''
   })
 
   useEffect(() => {
@@ -26,21 +13,30 @@ const Stock = props => {
     fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${Object.keys(props.stockData)[0]}&apikey=GJNL5RPAWAUNFOK6`)
       .then(resp => resp.json())
       .then(stockData => {
-        setStockState({ 
-          price: parseFloat(stockData["Global Quote"]["05. price"]),
-          dayOpenPrice: parseFloat(stockData["Global Quote"]["02. open"])
+        let currentPrice = parseFloat(stockData["Global Quote"]["05. price"])
+        let openPrice = parseFloat(stockData["Global Quote"]["02. open"])
+        let tickerColor = ''
+        if (currentPrice > openPrice) {
+          tickerColor = 'green'
+        } else if (currentPrice < openPrice) {
+          tickerColor = 'red'
+        } else {
+          tickerColor = 'grey'
+        }
+        setStockState({
+          price: currentPrice,
+          dayOpenPrice: openPrice,
+          color: tickerColor
         })
       })
       .catch(error => alert(error))
   }, [props.stockData])
 
-  // render() {
   return (
     <li>
-      <em className="stock-ticker" {style}>{Object.keys(props.stockData)[0]}</em> - {Object.values(props.stockData)[0]} Shares Value: ${Math.round(stockState.price * Object.values(props.stockData)[0] * 10000) / 10000}
+      <em className="stock-ticker" style={{ color: `${stockState.color}` }}>{Object.keys(props.stockData)[0]}</em> - {Object.values(props.stockData)[0]} Shares Value: ${Math.round(stockState.price * Object.values(props.stockData)[0] * 10000) / 10000}
     </li>
   )
-  // }
 }
 
 export default Stock

@@ -46,7 +46,7 @@ const Portfolio = props => {
           handleStock(ticker, quantity, price, transactionTotal)
         }
       })
-      .catch(error => console.log(error))
+      .catch(error => alert('Oops, something went wrong! Check that you have entered a valid symbol'))
   }
 
   const handleStock = (ticker, quantity, price, total) => {
@@ -85,38 +85,13 @@ const Portfolio = props => {
     })
       .then(resp => resp.json())
       .then(transactionData => {
-        console.log(total)
         let balance = props.userData.attributes.balance
         let remainingBalance = balance - total
-        debugger
         props.handleBalanceChange(remainingBalance)
-        // setUserData(
-        //   {
-        //     ...userData,
-        //     attributes: {
-        //       ...userData.attributes,
-        //       balance: remainingBalance
-        //     }
-        //   }
-        // )
       })
       .catch(error => console.log(error))
   }
 
-  // const handleBalanceChange = (remainingBalance) => {
-  //   fetch(`http://localhost:3000/users/${this.props.userData.id}`, {
-  //     method: 'PATCH',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({ balance: remainingBalance })
-  //   })
-  //     .then(resp => resp.json())
-  //     .then(userData => {
-  //       setUserData(userData.data)
-  //     })
-  // }
   return (
     <div className="portfolio">
       {props.userData ? <StocksContainer userData={props.userData} stocks={stocks} /> : 'Loading...'}
