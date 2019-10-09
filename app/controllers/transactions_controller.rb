@@ -17,6 +17,6 @@ class TransactionsController < ApplicationController
 
   private
   def transaction_params
-    params.permit(:user_id, :stock_id, :quantity, :price)
+    params.permit(:user_id, :stock_id, :quantity, :price, :method)
   end
 end
