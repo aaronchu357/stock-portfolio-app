@@ -7,7 +7,7 @@ const BuyStockForm = props => {
 
   const handleStockFormSubmit = (e) => {
     e.preventDefault()
-    props.handleStockFormSubmit(ticker, quantity)
+    props.handleStockFormSubmit(ticker, quantity, "BUY")
   }
 
   return (

@@ -33,7 +33,7 @@ const Portfolio = props => {
     }
   }, [props.userData])
 
-  const handleStockFormSubmit = (ticker, quantity) => {
+  const handleStockFormSubmit = (ticker, quantity, method) => {
     fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=GJNL5RPAWAUNFOK6`)
       .then(resp => resp.json())
       .then(stockData => {
@@ -43,13 +43,13 @@ const Portfolio = props => {
         if (userBalance < transactionTotal) {
           alert(`Balance insufficient. Transaction total is ${transactionTotal}.`)
         } else {
-          handleStock(ticker, quantity, price, transactionTotal)
+          handleStock(ticker, quantity, price, transactionTotal, method)
         }
       })
       .catch(error => alert('Oops, something went wrong! Check that you have entered a valid symbol'))
   }
 
-  const handleStock = (ticker, quantity, price, total) => {
+  const handleStock = (ticker, quantity, price, total, method) => {
     let stockInfo = { ticker: ticker }
     fetch('http://localhost:3000/stocks', {
       method: 'POST',
@@ -62,17 +62,18 @@ const Portfolio = props => {
     })
       .then(resp => resp.json())
       .then(stockData => {
-        handleTransaction(stockData.data, price, quantity, total)
+        handleTransaction(stockData.data, price, quantity, total, method)
       })
       .catch(error => console.log(error))
   }
 
-  const handleTransaction = (stockData, price, quantity, total) => {
+  const handleTransaction = (stockData, price, quantity, total, method) => {
     let transactionInfo = {
       quantity: parseInt(quantity),
       user_id: props.userData.id,
       stock_id: parseInt(stockData.id),
-      price: price
+      price: price,
+      method: method
     }
     fetch('http://localhost:3000/transactions', {
       method: 'POST',

@@ -1,9 +1,9 @@
 import React from 'react'
 
 const Transaction = props => {
-  return(
+  return (
     <li>
-      {props.transactionData.attributes.stock.ticker} - {props.transactionData.attributes.quantity} Shares @ ${props.transactionData.attributes.price}
+      {props.transactionData.attributes.method} ({props.transactionData.attributes.stock.ticker}) - {props.transactionData.attributes.quantity} Shares @ ${props.transactionData.attributes.price}
     </li>
   )
 }
