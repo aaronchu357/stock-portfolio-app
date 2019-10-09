@@ -1,4 +1,4 @@
 class StockSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :ticker, :price
+  attributes :ticker
 end
