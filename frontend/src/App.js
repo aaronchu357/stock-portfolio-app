@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import SignIn from './containers/SignIn'
 import Register from './containers/Register'
 import PortfolioPage from './containers/PortfolioPage'
+import TransactionPage from './pages/TransactionPage'
 
 class App extends React.Component {
 
@@ -47,6 +48,7 @@ class App extends React.Component {
     return (
       <Switch>
         <Route exact path='/portfolio' render={(routerProps) => <PortfolioPage {...routerProps} userData={this.state.userData} />} />
+        <Route exact path='/transactions' render={(routerProps) => <TransactionPage {...routerProps} userData={this.state.userData} />} />
         {
           localStorage.token ?
             <Redirect to='/portfolio' />
