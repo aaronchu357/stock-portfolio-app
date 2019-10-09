@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Portfolio from '../containers/Portfolio'
 import NavBar from '../components/NavBar'
 
-class PortfolioPage extends React.Component {
+const PortfolioPage = props => {
 
-  state = {
+  const [portfolioPageState, setPortfolioPageState] = useState({
     userData: '',
     balance: ''
-  }
+  })
 
-  componentDidMount() {
+  useEffect(() => {
     if (localStorage.token) {
       fetch('http://localhost:3000/profile', {
         headers: {
@@ -18,16 +18,16 @@ class PortfolioPage extends React.Component {
       })
         .then(resp => resp.json())
         .then(userInfo => {
-          this.setState({
+          setPortfolioPageState({
             userData: userInfo.data,
             balance: userInfo.data.attributes.balance
           })
         })
     }
-  }
+  }, [props.userData])
 
-  handleBalanceChange = (remainingBalance) => {
-    fetch(`http://localhost:3000/users/${this.props.userData.id}`, {
+  const handleBalanceChange = remainingBalance => {
+    fetch(`http://localhost:3000/users/${props.userData.id}`, {
       method: 'PATCH',
       headers: {
         'Accept': 'application/json',
@@ -37,23 +37,21 @@ class PortfolioPage extends React.Component {
     })
       .then(resp => resp.json())
       .then(userData => {
-        this.setState({ userData: userData.data })
+        setPortfolioPageState({ userData: userData.data })
         window.location.reload()
       })
   }
 
-  render() {
-    return (
-      <div>
-        <NavBar />
-        <h2 className="page-header">Portfolio</h2>
-        Hi, {this.state.userData ? this.state.userData.attributes.name : null}
-        <br />
-        Balance: {this.state.balance ? this.state.balance : null}
-        <Portfolio {...this.props} handleBalanceChange={this.handleBalanceChange} />
-      </div>
-    )
-  }
+  return (
+    <div>
+      <NavBar />
+      <h2 className="page-header">Portfolio</h2>
+      Hi, {portfolioPageState.userData ? portfolioPageState.userData.attributes.name : null}
+      <br />
+      Balance: {portfolioPageState.balance ? portfolioPageState.balance : null}
+      <Portfolio {...props} handleBalanceChange={handleBalanceChange} />
+    </div>
+  )
 }
 
 export default PortfolioPage
