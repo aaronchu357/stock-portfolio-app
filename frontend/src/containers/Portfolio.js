@@ -37,7 +37,6 @@ const Portfolio = props => {
     fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=GJNL5RPAWAUNFOK6`)
       .then(resp => resp.json())
       .then(stockData => {
-        debugger
         let userBalance = props.userData.attributes.balance
         let price = parseFloat(stockData["Global Quote"]["05. price"])
         let transactionTotal = price * quantity
