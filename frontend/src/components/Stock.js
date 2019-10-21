@@ -35,7 +35,7 @@ const Stock = props => {
       })
       .catch(error => {
         console.log(error)
-        alert('Sorry about some of your portfolio data. You have reached the limit for API calls. Please wait 60 seconds and try again.')
+        alert('Sorry about some of your portfolio data. You may have reached the limit for API calls. Please wait 10-20 seconds and try again.')
       })
   }, [props.stockData])
 
