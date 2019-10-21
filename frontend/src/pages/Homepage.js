@@ -6,13 +6,13 @@ const Homepage = () => {
     <>
       <h1 className="landing-page-main-header">Stock Portfolio App</h1>
       <div className='homepage-link'>
-        <a class="effect1" href="http://localhost:3001/login">
+        <a class="effect1" href="/login">
           Log In
           <span class="bg"></span>
         </a>
       </div>
       <div className='homepage-link'>
-        <a class="effect1" href="http://localhost:3001/register">
+        <a class="effect1" href="/register">
           Register
           <span class="bg"></span>
         </a>

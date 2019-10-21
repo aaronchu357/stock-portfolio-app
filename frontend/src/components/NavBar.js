@@ -5,7 +5,7 @@ import './NavBar.css'
 const NavBar = () => {
   return (
     <nav>
-      <NavLink to="/portfolio">Portfolio</NavLink> | <NavLink to="/transactions">Transactions</NavLink> | <a href="http://localhost:3001/" onClick={() => localStorage.clear()}>Log Out</a>
+      <NavLink to="/portfolio">Portfolio</NavLink> | <NavLink to="/transactions">Transactions</NavLink> | <a href="/" onClick={() => localStorage.clear()}>Log Out</a>
     </nav>
   )
 }

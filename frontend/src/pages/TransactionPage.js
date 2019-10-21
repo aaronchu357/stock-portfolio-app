@@ -9,7 +9,7 @@ const TransactionPage = props => {
   useEffect(() => {
     if (props.userData) {
       // API request from nested endpoint user/:id/transactions
-      fetch(`http://localhost:3000/users/${props.userData.id}/transactions`)
+      fetch(`/users/${props.userData.id}/transactions`)
         .then(resp => resp.json())
         .then(userTransactions => {
           setTransactions(userTransactions.data)

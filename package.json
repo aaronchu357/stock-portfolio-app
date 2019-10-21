@@ -1,0 +1,30 @@
+{
+  "name": "stock-portfolio-app",
+  "version": "1.0.0",
+  "description": "## Information The root of this directory house all files for the server and the client. For the frontend code: `cd frontend`.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {
+    "react-router-dom": "^5.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd frontend && npm install && npm run-script build && cd ..",
+    "deploy": "cp -a frontend/build/. public/",
+    "postinstall": "npm run-script build && npm run-script deploy && echo 'Client built!'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronchu357/stock-portfolio-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aaronchu357/stock-portfolio-app/issues"
+  },
+  "homepage": "https://github.com/aaronchu357/stock-portfolio-app#readme"
+}

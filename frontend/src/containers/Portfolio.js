@@ -9,7 +9,7 @@ const Portfolio = props => {
   useEffect(() => {
     if (props.userData) {
       // API request from nested endpoint user/:id/transactions
-      fetch(`http://localhost:3000/users/${props.userData.id}/transactions`)
+      fetch(`/users/${props.userData.id}/transactions`)
         .then(resp => resp.json())
         .then(userTransactions => {
           let finalAssortedTransactionsArray = []
@@ -54,7 +54,7 @@ const Portfolio = props => {
 
   const handleStock = (ticker, quantity, price, total, method) => {
     let stockInfo = { ticker: ticker }
-    fetch('http://localhost:3000/stocks', {
+    fetch('/stocks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ const Portfolio = props => {
       price: price,
       method: method
     }
-    fetch('http://localhost:3000/transactions', {
+    fetch('/transactions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

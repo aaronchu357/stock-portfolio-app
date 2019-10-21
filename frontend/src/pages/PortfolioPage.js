@@ -11,7 +11,7 @@ const PortfolioPage = props => {
 
   useEffect(() => {
     if (localStorage.token) {
-      fetch('http://localhost:3000/profile', {
+      fetch('/profile', {
         headers: {
           Authorization: localStorage.token
         }
@@ -27,7 +27,7 @@ const PortfolioPage = props => {
   }, [props.userData])
 
   const handleBalanceChange = remainingBalance => {
-    fetch(`http://localhost:3000/users/${props.userData.id}`, {
+    fetch(`/users/${props.userData.id}`, {
       method: 'PATCH',
       headers: {
         'Accept': 'application/json',
