@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './PreLoginForms.css'
 
 const RegisterForm = props => {
 
