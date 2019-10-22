@@ -1,4 +1,5 @@
 # Stock Portfolio README
+## [Live Link](https://simple-stock-portfolio-app.herokuapp.com)
 
 ## Information
 The root of this directory house all files for the server and the client. For the frontend code: `cd frontend`.
