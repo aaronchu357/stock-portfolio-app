@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def secret
-    'oscartalentpipeline'
+    Rails.application.credentials.my_app_secret
   end
 
   def token
