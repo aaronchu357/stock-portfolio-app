@@ -1,4 +1,4 @@
-# Stock Portfolio README
+# Simple Stock Portfolio README
 ## [Live Link](https://simple-stock-portfolio-app.herokuapp.com)
 
 ## Information
